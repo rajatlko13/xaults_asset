@@ -1,0 +1,73 @@
+2026-01-15
+
+About Xaults
+Xaults is pioneering the next generation of nancial and banking softwares using Distributed Ledger
+Technology (DLT) and Smart Contracts. Tech stack used at Xaults include golang, rust, python, React,
+cosmos-sdk, solana, open zepplin, foundry, etc.
+
+Coding Challenge: Upgradeable Asset Tokenizer
+Estimated Time: 1-2 days
+Focus: Smart Contract Ecosystem, UUPS Upgradeability, Storage Layout
+Deadline: Sun, Jan 18, 2026
+email: hiring@xaults.com
+
+Objective
+Design and implement a secure, UUPS-upgradeable smart contract representing a tokenized nancial asset.
+You are required to plan the entire lifecycle: development, testing, and deployment scripts. You are
+expected to use the latest industry-standard tools available. The design must follow basic smart-contract
+security best practices and include clear event emission for minting and administrative actions.
+
+The Scenario
+Xaults is launching a new tokenized asset class. As this is a long-term nancial instrument, the contract logic
+will need to evolve over time. You are tasked with building the V1 implementation and demonstrating a safe
+upgrade path to V2 using scripts and tests.
+
+Core Requirements
+1. Smart Contract Architecture (V1)
+Implement a contract named AssetToken that inherits from OpenZeppelin's upgradeable contracts.
+Standard: ERC-20 (Upgradeable).
+Pattern: UUPS (Universal Upgradeable Proxy Standard).
+Initialization: Use an initialize() function (no constructors).
+Storage Safety: Ensure future upgrades do not corrupt storage.
+
+2. Logic & Access Control
+Roles: Use DEFAULT_ADMIN_ROLE (for upgrades/admin) and MINTER_ROLE.
+Minting: Restricted to MINTER_ROLE and capped at maxSupply. Revert with a custom error
+MaxSupplyExceeded() if breached.
+
+Transfer: Standard token transfers between users.
+Upgrades: Ensure only the Admin can upgrade the contract logic.
+
+3. Environment Tasks
+/
+
+2026-01-15
+
+You must demonstrate pro ciency with the toolchain:
+Testing: Write a test suite in Solidity (not TypeScript/JavaScript).
+Scripting: Write a Solidity-based deployment script that deploys the V1 implementation, initializes the
+ERC1967Proxy, and sets up the admin.
+CLI Interaction: Include a command-line snippet showing how you would manually interact with the
+contract (e.g., minting a token) if it were deployed to a local testnet node.
+
+The Test Suite
+Your Solidity test le should validate the entire upgrade lifecycle:
+1. Setup: Deploy V1 via an ERC1967Proxy. Initialize with 1M max supply.
+2. State Check: Mint 100 tokens to a user. Assert balanceOf is 100.
+3. Upgrade:
+Deploy AssetTokenV2 (which adds a pause() function).
+Execute the upgrade on the proxy to switch to V2.
+4. Persistence Check: Assert the user's balance is still 100.
+5. New Logic Check: Call pause() on V2 and assert that transfers now revert.
+
+Deliverables
+1. Source Code: src/AssetToken.sol and src/AssetTokenV2.sol.
+2. Tests: A Solidity test le located in the test/ directory.
+3. Scripts: A deployment script located in the script/ directory.
+4. README:
+Instructions to setup, deploy, run, and test the assignment.
+A brief explanation of how you veri ed that the storage layout was safe for the upgrade.
+
+/
+
+
