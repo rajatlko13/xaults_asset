@@ -234,6 +234,11 @@ To verify storage layout is safe:
 3. **Appended-only pattern**: New functionality adds storage at the end
 4. **Gap variables**: Not needed here as contracts follow standard patterns
 
+Use this command to check if the contract is upgradeable safe -
+```bash
+npx @openzeppelin/upgrades-core validate
+```
+
 The OpenZeppelin Upgradeable contracts are designed with storage gaps:
 - `__gap[50]` is typically present in upgradeable base contracts
 - This allows for future storage additions without breaking upgrades
